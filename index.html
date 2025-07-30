@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pirate's Treasure</title>
+    <meta name="description" content="A treasure chest of links for movies, shows, anime, and more.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/1.png" type="image/png">
+    <link rel="shortcut icon" href="assets/1.png" type="image/png">
+
+    <!-- Social Media Preview (Open Graph & Twitter) -->
+    <meta property="og:title" content="Pirate's Treasure">
+    <meta property="og:description" content="A treasure chest of links for movies, shows, anime, and more.">
+    <meta property="og:image" content="assets/1.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pirate's Treasure">
+    <meta name="twitter:description" content="A treasure chest of links for movies, shows, anime, and more.">
+    <meta name="twitter:image" content="assets/1.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Ledger&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background-color: #1a1a1a;
+            --text-color: #E0E0E0;
+            --header-color: #f0e68c; /* Khaki */
+            --link-color: #d4af37; /* Gold */
+            --link-hover-bg-color: #b8860b; /* DarkGoldenRod */
+            --link-hover-text-color: #FFFFFF;
+            --link-visited-bg-color: #5a4d2c; /* Darker Gold/Brown */
+            --link-visited-text-color: #b0a080;
+            --section-background-color: #2c2c2c;
+            --border-color: #4a4a4a;
+        }
+
+        body {
+            font-family: 'Ledger', serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+            border-radius: 50%;
+            border: 3px solid var(--link-color);
+        }
+
+        header h1 {
+            font-family: 'IM Fell English SC', serif;
+            font-size: 3.5em;
+            color: var(--header-color);
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        header p {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .alert {
+            background-color: #333;
+            border-left: 4px solid var(--link-color);
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .alert a {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .alert a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            background-color: var(--section-background-color);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .section-header {
+            font-family: 'IM Fell English SC', serif;
+            font-size: 2.2em;
+            color: var(--header-color);
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--link-color);
+            padding-bottom: 10px;
+        }
+
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .link-item a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #3d3d3d;
+            height: 150px;
+            border-radius: 8px;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+            font-weight: 600;
+            padding: 10px;
+            border: 2px solid var(--border-color);
+            word-break: break-all;
+        }
+
+        .link-item a:hover {
+            background-color: var(--link-hover-bg-color);
+            color: var(--link-hover-text-color);
+            transform: scale(1.05);
+        }
+        
+        .link-item a:visited {
+            background-color: var(--link-visited-bg-color);
+            color: var(--link-visited-text-color);
+            border-color: #4a3b1a;
+        }
+        
+        .paid-item a {
+             font-size: 1.2em;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        footer a {
+            color: var(--link-color);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="assets/1.png" alt="Pirate's Treasure Logo" class="logo">
+            <h1>Pirate's Treasure</h1>
+            <p>A treasure chest of links for movies, shows, anime, and more.</p>
+        </header>
+
+        <div class="alert">
+            <strong>Ahoy!</strong> For a smooth voyage, use an ad-blocker like <a href="https://ublockorigin.com/" target="_blank" rel="noopener noreferrer">uBlock Origin</a> or a trusty browser like <a href="https://brave.com/" target="_blank" rel="noopener noreferrer">Brave</a> to fend off pesky ads and pop-ups.
+        </div>
+
+        <!-- Movies & Shows Section -->
+        <div class="section">
+            <h2 class="section-header">Movies & Shows</h2>
+            <div class="link-grid">
+                <div class="link-item"><a href="https://www.1shows.ru/" target="_blank" rel="noopener noreferrer">1shows.ru</a></div>
+                <div class="link-item"><a href="https://flickystream.net/" target="_blank" rel="noopener noreferrer">flickystream.net</a></div>
+                <div class="link-item"><a href="https://www.rgshows.me/" target="_blank" rel="noopener noreferrer">rgshows.me</a></div>
+                <div class="link-item"><a href="https://vidjoy.pro/" target="_blank" rel="noopener noreferrer">vidjoy.pro</a></div>
+                <div class="link-item"><a href="https://rivestream.org/" target="_blank" rel="noopener noreferrer">rivestream.org</a></div>
+                <div class="link-item"><a href="https://watch.spencerdevs.xyz/" target="_blank" rel="noopener noreferrer">spencerdevs.xyz</a></div>
+                <div class="link-item"><a href="https://filmcave.net/" target="_blank" rel="noopener noreferrer">filmcave.net</a></div>
+                <div class="link-item"><a href="https://watch.corsflix.net/" target="_blank" rel="noopener noreferrer">corsflix.net</a></div>
+                <div class="link-item"><a href="https://catflix.su/home" target="_blank" rel="noopener noreferrer">catflix.su</a></div>
+                <div class="link-item"><a href="https://cinemadeck.com/" target="_blank" rel="noopener noreferrer">cinemadeck.com</a></div>
+                <div class="link-item"><a href="https://nepu.to/" target="_blank" rel="noopener noreferrer">nepu.to</a></div>
+                <div class="link-item"><a href="https://www.wooflixtv.co/" target="_blank" rel="noopener noreferrer">wooflixtv.co</a></div>
+                <div class="link-item"><a href="https://freek.to/" target="_blank" rel="noopener noreferrer">freek.to</a></div>
+                <div class="link-item"><a href="https://www.cineby.app/" target="_blank" rel="noopener noreferrer">cineby.app</a></div>
+                <div class="link-item"><a href="https://fmovies-hd.to/home/" target="_blank" rel="noopener noreferrer">fmovies-hd.to</a></div>
+                <div class="link-item"><a href="https://xprime.tv/" target="_blank" rel="noopener noreferrer">xprime.tv</a></div>
+                <div class="link-item"><a href="https://bflix.sh/home/" target="_blank" rel="noopener noreferrer">bflix.sh</a></div>
+                <div class="link-item"><a href="https://hexa.watch/" target="_blank" rel="noopener noreferrer">hexa.watch</a></div>
+                <div class="link-item"><a href="https://pstream.mov/" target="_blank" rel="noopener noreferrer">pstream.mov</a></div>
+                <div class="link-item"><a href="https://willow.arlen.icu/" target="_blank" rel="noopener noreferrer">willow.arlen.icu</a></div>
+            </div>
+        </div>
+
+        <!-- Anime Section -->
+        <div class="section">
+            <h2 class="section-header">Anime</h2>
+            <div class="link-grid">
+                <div class="link-item"><a href="https://www.miruro.tv" target="_blank" rel="noopener noreferrer">miruro.tv</a></div>
+                <div class="link-item"><a href="https://hianime.to/home" target="_blank" rel="noopener noreferrer">hianime.to</a></div>
+                <div class="link-item"><a href="https://zenime.site" target="_blank" rel="noopener noreferrer">zenime.site</a></div>
+                <div class="link-item"><a href="https://www.enma.lol" target="_blank" rel="noopener noreferrer">enma.lol</a></div>
+                <div class="link-item"><a href="https://aniwatchtv.to/home" target="_blank" rel="noopener noreferrer">aniwatchtv.to</a></div>
+                <div class="link-item"><a href="https://kaido.to/home" target="_blank" rel="noopener noreferrer">kaido.to</a></div>
+                <div class="link-item"><a href="https://anicrush.to/home" target="_blank" rel="noopener noreferrer">anicrush.to</a></div>
+                <div class="link-item"><a href="https://kaa.mx/" target="_blank" rel="noopener noreferrer">kaa.mx</a></div>
+                <div class="link-item"><a href="https://animekai.to/home" target="_blank" rel="noopener noreferrer">animekai.to</a></div>
+                <div class="link-item"><a href="https://animez.org/" target="_blank" rel="noopener noreferrer">animez.org</a></div>
+            </div>
+        </div>
+
+        <!-- Manga Section -->
+        <div class="section">
+            <h2 class="section-header">Manga</h2>
+            <div class="link-grid">
+                <div class="link-item"><a href="https://mangadex.org/" target="_blank" rel="noopener noreferrer">mangadex.org</a></div>
+                <div class="link-item"><a href="https://comick.io/home2" target="_blank" rel="noopener noreferrer">comick.io</a></div>
+                <div class="link-item"><a href="https://mangareader.to/home" target="_blank" rel="noopener noreferrer">mangareader.to</a></div>
+                <div class="link-item"><a href="https://mangago.me/" target="_blank" rel="noopener noreferrer">mangago.me</a></div>
+                <div class="link-item"><a href="https://mangafire.to/home" target="_blank" rel="noopener noreferrer">mangafire.to</a></div>
+                <div class="link-item"><a href="https://allmanga.to/manga?cty=ALL" target="_blank" rel="noopener noreferrer">allmanga.to</a></div>
+                <div class="link-item"><a href="https://mangakakalot.com/" target="_blank" rel="noopener noreferrer">mangakakalot.com</a></div>
+                <div class="link-item"><a href="https://asuracomic.net/" target="_blank" rel="noopener noreferrer">asuracomic.net</a></div>
+                <div class="link-item"><a href="https://mangahub.io/" target="_blank" rel="noopener noreferrer">mangahub.io</a></div>
+                <div class="link-item"><a href="https://mangapark.io/" target="_blank" rel="noopener noreferrer">mangapark.io</a></div>
+                <div class="link-item"><a href="https://weebcentral.com/" target="_blank" rel="noopener noreferrer">weebcentral.com</a></div>
+                <div class="link-item"><a href="https://mangakatana.com/" target="_blank" rel="noopener noreferrer">mangakatana.com</a></div>
+            </div>
+        </div>
+
+        <!-- Live TV Section -->
+        <div class="section">
+            <h2 class="section-header">Live TV</h2>
+            <div class="link-grid">
+                <div class="link-item"><a href="https://thetvapp.to" target="_blank" rel="noopener noreferrer">thetvapp.to</a></div>
+                <div class="link-item"><a href="https://tv247.us/all-channels/" target="_blank" rel="noopener noreferrer">tv247.us</a></div>
+                <div class="link-item"><a href="https://publiciptv.com/" target="_blank" rel="noopener noreferrer">publiciptv.com</a></div>
+                <div class="link-item"><a href="https://en12.sportplus.live/" target="_blank" rel="noopener noreferrer">sportplus.live</a></div>
+                <div class="link-item"><a href="https://the.streameast.app/v86" target="_blank" rel="noopener noreferrer">streameast.app</a></div>
+                <div class="link-item"><a href="https://v2.sportsurge.net/" target="_blank" rel="noopener noreferrer">sportsurge.net</a></div>
+                <div class="link-item"><a href="https://tv.garden/" target="_blank" rel="noopener noreferrer">tv.garden</a></div>
+                <div class="link-item"><a href="http://totv.org/tv/usa/" target="_blank" rel="noopener noreferrer">totv.org</a></div>
+                <div class="link-item"><a href="https://rivestream.org/livesports/" target="_blank" rel="noopener noreferrer">rivestream sports</a></div>
+                <div class="link-item"><a href="https://www.1shows.ru/sports" target="_blank" rel="noopener noreferrer">1shows sports</a></div>
+            </div>
+        </div>
+
+        <!-- Paid Services Section -->
+        <div class="section">
+            <h2 class="section-header">Paid Subscription Services</h2>
+            <div class="link-grid">
+                <div class="link-item paid-item"><a href="https://www.disneyplus.com/" target="_blank" rel="noopener noreferrer">Disney+</a></div>
+                <div class="link-item paid-item"><a href="https://www.shudder.com/" target="_blank" rel="noopener noreferrer">Shudder</a></div>
+                <div class="link-item paid-item"><a href="https://www.hulu.com/" target="_blank" rel="noopener noreferrer">Hulu</a></div>
+                <div class="link-item paid-item"><a href="https://www.netflix.com/" target="_blank" rel="noopener noreferrer">Netflix</a></div>
+                <div class="link-item paid-item"><a href="https://www.max.com/" target="_blank" rel="noopener noreferrer">Max</a></div>
+                <div class="link-item paid-item"><a href="https://tv.apple.com/" target="_blank" rel="noopener noreferrer">Apple TV+</a></div>
+                <div class="link-item paid-item"><a href="https://www.amazon.com/gp/video/storefront/" target="_blank" rel="noopener noreferrer">Prime Video</a></div>
+                <div class="link-item paid-item"><a href="https://www.paramountplus.com/" target="_blank" rel="noopener noreferrer">Paramount+</a></div>
+                <div class="link-item paid-item"><a href="https://www.crunchyroll.com/" target="_blank" rel="noopener noreferrer">Crunchyroll</a></div>
+                <div class="link-item paid-item"><a href="https://www.mgmplus.com/" target="_blank" rel="noopener noreferrer">MGM+</a></div>
+                <div class="link-item paid-item"><a href="https://www.peacocktv.com/" target="_blank" rel="noopener noreferrer">Peacock</a></div>
+                <div class="link-item paid-item"><a href="https://www.amcplus.com/" target="_blank" rel="noopener noreferrer">AMC+</a></div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>This treasure map is for informational purposes only and holds no hosted content. All links lead to third-party shores.</p>
+            <p>© <span id="year"></span> Pirate's Treasure. All rights reserved.</p>
+        </footer>
+
+    </div>
+    
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
