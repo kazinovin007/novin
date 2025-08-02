@@ -481,7 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const titleWrapper = document.createElement('div');
             titleWrapper.className = 'category-header';
             // MODIFICATION: Removed the delete category button from the innerHTML
-            titleWrapper.innerHTML = <h2 class="category-title">${category.name}</h2>;
+            titleWrapper.innerHTML = `<h2 class="category-title">${category.name}</h2>`;
             
             const grid = document.createElement('div');
             grid.className = 'link-grid';
@@ -491,8 +491,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const linkWrapper = document.createElement('a');
                 linkWrapper.href = link.url;
                 linkWrapper.target = '_blank';
-                linkWrapper.className = link-box ${isFavorite ? 'favorite' : ''};
-                linkWrapper.title = Go to ${getDomain(link.url)};
+                linkWrapper.className = `link-box ${isFavorite ? 'favorite' : ''}`;
+                linkWrapper.title = `Go to ${getDomain(link.url)}`;
                 linkWrapper.innerHTML = `
                     <span>${getDomain(link.url)}</span>
                     <div class="link-box-actions">
@@ -527,7 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const deleteLink = (url, categoryName) => {
-        if (!confirm(Are you sure you want to delete ${getDomain(url)}?)) return;
+        if (!confirm(`Are you sure you want to delete ${getDomain(url)}?`)) return;
         const category = data.categories.find(c => c.name === categoryName);
         if (category) {
             category.links = category.links.filter(l => l.url !== url);
