@@ -8,7 +8,7 @@
     <!-- Meta Info for SEO and Social Sharing -->
     <meta name="description" content="Your personal, elegant, and customizable dashboard for all your favorite media links.">
     
-    <!-- Favicon and App Icons (All using the same image) -->
+    <!-- Favicon and App Icons -->
     <link rel="icon" href="assets/1.png" type="image/png">
     <link rel="apple-touch-icon" href="assets/1.png">
 
@@ -25,7 +25,6 @@
     <meta name="twitter:image" content="assets/1.png">
     
     <!-- External Libraries -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,183 +32,353 @@
     
     <style>
         :root {
-            --bg-color: #1a1a1a;
-            --box-color: #2c2c2c;
-            --box-hover-color: #383838;
-            --text-color: #cccccc;
+            --bg-color: #121212;
+            --box-color: #1e1e1e;
+            --box-hover-color: #2a2a2a;
+            --text-color: #e0e0e0;
+            --text-muted-color: #888888;
             --accent-color: #c7a55b;
-            --favorite-color: #5a4b2a;
-            --delete-color: #993333;
+            --accent-glow-color: rgba(199, 165, 91, 0.5);
+            --favorite-color: #3e351f;
+            --delete-color: #d9534f;
+            --success-color: #5cb85c;
+            --border-color: #333;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --font-primary: 'Roboto', sans-serif;
+            --font-header: 'Playfair Display', serif;
         }
+
+        /* --- Global Styles & Resets --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             background-color: var(--bg-color);
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39sbGxsbW1paWpwcHCnp6eSkpJoaGhiYmKtra2ZmZlBERD+AAAAEXRSTlMAw8iS/gP594L2/BgcE/vg4jD5YwAAAXBJREFUeNrt1duWgyAQgGGDgcBAwMzA4v//b64t2KySJEiLg65PS0pW3rJ7j9c6BPv20km3Mh+5L+1q5mC1iZd2G6eDHo1nZbymAVs64EX3LDU72c4wO6O2b0s3H/so7qPAzKsb0IgaTnaSvdh/yIfxF9p8eRqJGpPZ/pL3k0YyGzNJ1sQeL9vgmNw2I9RwWk1c33a9g3jJ3p2+ANXWignA9F0r15e9p3e9qChKInL9C5VfVtrFfeDu3dk896k1S25fL5Ddfv1y4b+d/BLf53ch83/8p9Ut/v6A/9B/eR5+5/t77w8v53Jn60X40O2/7L5g8fYNM+f+D5h8zIy1Yv1ZoK8Y3MyS8b/2s+kP8ALzUub0e3bYvfp0A/5BvAa9k6Yt83V/iJ/17fgE/M9b+d1uLmmfS3/sN/uH/APz+vAf4paeXbA/5Bj5vF/2//wD/8P+BPz/P+QEAAAAASUVORK5CYII=');
             color: var(--text-color);
-            font-family: 'Roboto', sans-serif;
+            font-family: var(--font-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        .header-font {
-            font-family: 'Playfair Display', serif;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        /* --- Header & Footer --- */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        header h1 {
+            font-family: var(--font-header);
             color: var(--accent-color);
+            font-size: 3rem;
         }
+
+        .info-box {
+            max-width: 48rem;
+            margin: 1.5rem auto 0;
+            padding: 1rem;
+            background-color: rgba(31, 41, 55, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-muted-color);
+            font-style: italic;
+        }
+
+        .info-box .fas {
+            margin-right: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 0 1rem 2rem;
+            font-size: 0.75rem;
+            color: var(--text-muted-color);
+        }
+        
+        /* --- Category & Link Grid --- */
+        .category {
+            margin-bottom: 3rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-title {
+            font-family: var(--font-header);
+            font-size: 2.25rem;
+            color: var(--text-color);
+        }
+
         .accent-line {
             height: 1px;
-            background-color: var(--accent-color);
-            opacity: 0.6;
+            background: var(--accent-color);
+            opacity: 0.4;
+            margin-bottom: 1.5rem;
         }
+
+        .link-grid {
+            display: grid;
+            gap: 1.25rem;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+        
+        /* --- Link Box & Action Buttons --- */
         .link-box {
             background-color: var(--box-color);
             border-radius: 12px;
-            transition: all 0.2s ease-in-out;
-            border: 1px solid #444;
+            border: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
             aspect-ratio: 1.5 / 1;
-            position: relative;
-            padding: 8px;
+            padding: 1rem;
             text-align: center;
             word-break: break-word;
+            text-decoration: none;
+            color: var(--text-color);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
         }
+
         .link-box:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px) scale(1.02);
             background-color: var(--box-hover-color);
             border-color: var(--accent-color);
+            box-shadow: 0 0 15px var(--accent-glow-color);
         }
+
         .link-box.favorite {
             background-color: var(--favorite-color);
-            color: #fff;
+            border-color: var(--accent-color);
             font-weight: 500;
         }
-        .action-button {
+
+        .link-box-actions {
             position: absolute;
-            color: #888;
-            background-color: rgba(0,0,0,0.3);
+            top: 8px;
+            right: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .action-button {
+            color: var(--text-muted-color);
+            background: rgba(0,0,0,0.3);
+            border: none;
             border-radius: 50%;
             width: 28px;
             height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0; /* Hidden by default */
+            transform: translateX(10px); /* Start off-screen */
+            transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+        }
+        
+        /* Show buttons on parent hover */
+        .link-box:hover .action-button {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* Stagger the animation on hover */
+        .link-box:hover .action-button:nth-child(2) { transition-delay: 0.05s; }
+        .link-box:hover .action-button:nth-child(3) { transition-delay: 0.1s; }
+
+        /* Keep the favorite button visible if it's active */
+        .action-button.fav-button.is-favorite {
+            opacity: 1;
+            transform: translateX(0);
+            color: var(--accent-color);
+        }
+
+        .action-button:hover { background-color: rgba(0,0,0,0.5); }
+        .action-button.edit-button:hover { color: var(--accent-color); }
+        .action-button.delete-button:hover { color: var(--delete-color); }
+
+
+        /* --- Floating Action Button (FAB) --- */
+        #add-item-fab {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent-color), #e0c285);
+            color: var(--bg-color);
+            border: none;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
-            opacity: 0; /* Hidden by default */
-            cursor: pointer;
+            box-shadow: 0 8px 20px var(--shadow-color);
+            font-size: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .link-box:hover .action-button {
-            opacity: 1; /* Show on hover */
-        }
-        .fav-button { top: 8px; right: 8px; }
-        .edit-button { top: 8px; left: 40px; }
-        .delete-button { top: 8px; left: 8px; }
-        .action-button:hover { color: var(--accent-color); }
-        .delete-button:hover { color: var(--delete-color); }
-        .fav-button.is-favorite { color: var(--accent-color); opacity: 1; }
         
-        .delete-category-button {
-            color: #666;
-            margin-left: 12px;
-            transition: color 0.2s;
-            display: inline-block;
-            opacity: 0.3;
-        }
-        .delete-category-button:hover {
-            color: var(--delete-color);
-            opacity: 1;
+        #add-item-fab:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 12px 25px var(--shadow-color);
         }
 
+        /* --- Modal & Forms --- */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(8px);
-            display: flex; justify-content: center; align-items: center;
-            z-index: 1000; transition: opacity 0.3s ease;
-            opacity: 0; pointer-events: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
         }
-        .modal-overlay.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        
+        .modal-overlay.visible { opacity: 1; pointer-events: auto; }
+
         .modal-content {
             background: var(--box-color);
-            padding: 2rem; border-radius: 16px;
-            width: 90%; max-width: 500px;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-            border: 1px solid #444; position: relative;
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 12px 30px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
         }
-        .form-input {
-            background-color: #383838;
-            border: 1px solid #555;
-            color: white; transition: border-color 0.2s;
+        
+        .modal-overlay.visible .modal-content { transform: scale(1); }
+
+        #close-modal-btn {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            background: none; border: none;
+            color: var(--text-muted-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
         }
-        .form-input:focus {
-            outline: none; border-color: var(--accent-color);
+        #close-modal-btn:hover { color: var(--text-color); transform: rotate(90deg); }
+
+        #modal-title {
+            text-align: center;
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 2rem;
         }
-        .fab {
-            background-color: var(--accent-color);
-            color: #111;
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text-muted-color); }
+        .form-input, select.form-input {
+            width: 100%;
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
+        .form-input:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 8px var(--accent-glow-color); }
+        
+        .form-divider {
+            text-align: center; margin: 2rem 0; color: var(--text-muted-color);
+            font-weight: 500; border-bottom: 1px solid var(--border-color); line-height: 0.1em;
+        }
+        .form-divider span { background: var(--box-color); padding: 0 10px; }
+
+        .form-button {
+            width: 100%; font-weight: bold; padding: 0.75rem 1rem; border-radius: 8px;
+            border: none; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+            font-size: 0.875rem; transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .form-button:hover { transform: translateY(-2px); opacity: 0.9; }
+        .form-button.primary { background: var(--accent-color); color: var(--bg-color); }
+        .form-button.success { background: var(--success-color); color: white; }
+
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="container">
 
         <!-- Header -->
-        <header class="text-center mb-12">
-            <h1 class="text-5xl header-font">SugoiLinks</h1>
-            <div class="max-w-3xl mx-auto mt-6 p-4 bg-gray-800/50 border border-gray-700/80 rounded-lg">
-                <p class="text-sm text-gray-400 italic">
-                    <i class="fas fa-shield-halved mr-2"></i>For a smooth ads free experience, use an ad-blocker like uBlock Origin or a trusty browser like Brave to fend off pesky ads and pop-ups.
-                </p>
+        <header>
+            <h1>SugoiLinks</h1>
+            <div class="info-box">
+                <p><i class="fas fa-shield-halved"></i> For a smooth ads free experience, use an ad-blocker like uBlock Origin or a trusty browser like Brave to fend off pesky ads and pop-ups.</p>
             </div>
         </header>
 
-        <!-- Main Content: Categories -->
-        <main id="categories-container" class="space-y-12">
-            <!-- Categories will be rendered here by JavaScript -->
-        </main>
+        <!-- Main Content: Categories will be injected by JS -->
+        <main id="categories-container"></main>
+
     </div>
     
     <!-- Footer -->
-    <footer class="text-center mt-16 mb-8 px-4">
-        <p class="text-xs text-gray-500 max-w-xl mx-auto">
-            <i class="fas fa-anchor mr-2"></i>These links are for informational purposes only and holds no hosted content. All links lead to third-party sites.
-        </p>
+    <footer>
+        <p><i class="fas fa-anchor"></i> These links are for informational purposes only and holds no hosted content. All links lead to third-party sites.</p>
     </footer>
 
     <!-- Floating Action Button -->
-    <button id="add-item-fab" class="fab fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg text-2xl transition-transform hover:scale-110">
-        <i class="fas fa-plus"></i>
-    </button>
+    <button id="add-item-fab"><i class="fas fa-plus"></i></button>
 
     <!-- Modal -->
     <div id="item-modal" class="modal-overlay">
         <div class="modal-content">
-            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fas fa-times text-2xl"></i></button>
-            <h2 id="modal-title" class="text-2xl font-bold mb-6 text-center text-white"></h2>
+            <button id="close-modal-btn"><i class="fas fa-times"></i></button>
+            <h2 id="modal-title"></h2>
             
-            <form id="link-form" class="mb-8">
-                 <!-- Hidden input to know if we are editing -->
-                <input type="hidden" id="original-link-url" value="">
-                <div class="mb-4">
-                    <label for="link-url" class="block mb-2 font-medium text-gray-300">URL</label>
-                    <input type="url" id="link-url" class="w-full form-input rounded p-2" required placeholder="https://...">
-                </div>
-                <div class="mb-4">
-                    <label for="link-category" class="block mb-2 font-medium text-gray-300">Category</label>
-                    <select id="link-category" class="w-full form-input rounded p-2"></select>
-                </div>
-                <button type="submit" id="link-submit-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"></button>
-            </form>
-
-            <div id="add-category-section">
-                <h3 class="text-xl font-semibold mb-4 border-b border-gray-600 pb-2 text-gray-200">Or Add a Category</h3>
-                <form id="add-category-form">
-                    <div class="mb-4">
-                        <label for="category-name" class="block mb-2 font-medium text-gray-300">Category Name</label>
-                        <input type="text" id="category-name" class="w-full form-input rounded p-2" required placeholder="e.g., Manhwa">
+            <div id="link-form-section">
+                <form id="link-form">
+                    <input type="hidden" id="original-link-url" value="">
+                    <div class="form-group">
+                        <label for="link-url" class="form-label">URL</label>
+                        <input type="url" id="link-url" class="form-input" required placeholder="https://...">
                     </div>
-                    <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg">Add Category</button>
+                    <div class="form-group">
+                        <label for="link-category" class="form-label">Category</label>
+                        <select id="link-category" class="form-input"></select>
+                    </div>
+                    <button type="submit" id="link-submit-btn" class="form-button primary"></button>
                 </form>
             </div>
+            
+            <div id="add-category-section">
+                <h3 class="form-divider"><span>Or</span></h3>
+                <form id="add-category-form">
+                     <div class="form-group">
+                        <label for="category-name" class="form-label">Add a New Category</label>
+                        <input type="text" id="category-name" class="form-input" required placeholder="e.g., Manhwa">
+                    </div>
+                    <button type="submit" class="form-button success">Add Category</button>
+                </form>
+            </div>
+
         </div>
     </div>
 
@@ -218,26 +387,70 @@ document.addEventListener('DOMContentLoaded', () => {
     const defaultData = {
         favorites: [],
         categories: [
-             { name: "Movies", links: [
-                { url: 'https://ridomovies.tv/discover' }, { url: 'https://flickystream.net/' }, { url: 'https://cinegram.net/home' }, { url: 'https://popcornmovies.org/' }, { url: 'https://www.rgshows.me/?p=2' }, { url: 'https://www.1shows.ru/' }, { url: 'https://onionplay.ch/movies/' }, { url: 'https://movies4f.com/home' }, { url: 'https://ww.yesmovies.ag/movie/filter/movies.html' }, { url: 'https://24drama.to/' }, { url: 'https://yflix.to/movie' }, { url: 'https://vertexmovies.com/netflix.html' }, { url: 'https://watch.hopfly.site/' }
-            ]},
-            { name: "Anime", links: [
-                { url: 'https://animeyy.com/' }, { url: 'https://www.animeonsen.xyz/' }, { url: 'https://www.animerealms.org/' }, { url: 'https://anihq.to/' }, { url: 'https://gogoanime.by/' }, { url: 'https://9animetv.to/' }, { url: 'https://hianime.to/' }, { url: 'https://animeflix.ltd/' }
-            ]},
-            { name: "Manga", links: [
-                { url: 'https://mangago.me/' }, { url: 'https://mangadex.org/' }, { url: 'https://mangakatana.com/' }, { url: 'https://mangafire.to/home' }
-            ]},
-            { name: "K-Drama", links: [
-                { url: 'https://kisskh.ovh/' }, { url: 'https://goplay.su/' }, { url: 'https://moviesmod.tube/' }
-            ]},
-            { name: "Cartoons", links: [
-                { url: 'https://hicartoon.to/home' }
-            ]},
-            { name: "Classic", links: [
-                { url: 'https://wikiflix.toolforge.org/#/' }
-            ]}
+            {
+                name: "Movies",
+                links: [
+                    { url: 'https://ridomovies.tv/discover' },
+                    { url: 'https://flickystream.net/' },
+                    { url: 'https://cinegram.net/home' },
+                    { url: 'https://popcornmovies.org/' },
+                    { url: 'https://www.rgshows.me/?p=2' },
+                    { url: 'https://www.1shows.ru/' },
+                    { url: 'https://onionplay.ch/movies/' },
+                    { url: 'https://movies4f.com/home' },
+                    { url: 'https://ww.yesmovies.ag/movie/filter/movies.html' },
+                    { url: 'https://24drama.to/' },
+                    { url: 'https://yflix.to/movie' },
+                    { url: 'https://vertexmovies.com/netflix.html' },
+                    { url: 'https://watch.hopfly.site/' }
+                ]
+            },
+            {
+                name: "Classic",
+                links: [
+                    { url: 'https://wikiflix.toolforge.org/#/' }
+                ]
+            },
+            {
+                name: "Anime",
+                links: [
+                    { url: 'https://animeyy.com/' },
+                    { url: 'https://www.animeonsen.xyz/' },
+                    { url: 'https://www.animerealms.org/' },
+                    { url: 'https://anihq.to/' },
+                    { url: 'https://gogoanime.by/' },
+                    { url: 'https://9animetv.to/' },
+                    { url: 'https://hianime.to/' },
+                    { url: 'https://animeflix.ltd/' }
+                ]
+            },
+            {
+                name: "Manga",
+                links: [
+                    { url: 'https://mangago.me/' },
+                    { url: 'https://mangadex.org/' },
+                    { url: 'https://mangakatana.com/' },
+                    { url: 'https://mangafire.to/home' }
+                ]
+            },
+            {
+                name: "Cartoons",
+                links: [
+                    { url: 'https://hicartoon.to/home' }
+                ]
+            },
+            {
+                name: "Kdrama",
+                links: [
+                    { url: 'https://kisskh.ovh/' },
+                    { url: 'https://goplay.su/' },
+                    { url: 'https://moviesmod.tube/' }
+                ]
+            }
         ]
     };
+
+
 
     let data = JSON.parse(localStorage.getItem('sugoiLinksData_v2')) || defaultData;
 
@@ -263,18 +476,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         data.categories.forEach(category => {
             const section = document.createElement('section');
+            section.className = 'category';
             
             const titleWrapper = document.createElement('div');
-            titleWrapper.className = 'flex items-center';
-            titleWrapper.innerHTML = `
-                <h2 class="text-4xl header-font mb-2">${category.name}</h2>
-                <button class="delete-category-button" title="Delete Category '${category.name}'">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
+            titleWrapper.className = 'category-header';
+            // MODIFICATION: Removed the delete category button from the innerHTML
+            titleWrapper.innerHTML = <h2 class="category-title">${category.name}</h2>;
             
             const grid = document.createElement('div');
-            grid.className = 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4';
+            grid.className = 'link-grid';
 
             category.links.forEach(link => {
                 const isFavorite = data.favorites.includes(link.url);
@@ -285,12 +495,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 linkWrapper.title = Go to ${getDomain(link.url)};
                 linkWrapper.innerHTML = `
                     <span>${getDomain(link.url)}</span>
-                    <button class="action-button delete-button" title="Delete"><i class="fas fa-trash-alt text-sm"></i></button>
-                    <button class="action-button edit-button" title="Edit"><i class="fas fa-pencil-alt text-sm"></i></button>
-                    <button class="action-button fav-button ${isFavorite ? 'is-favorite' : ''}" title="Favorite"><i class="fas fa-star text-sm"></i></button>
+                    <div class="link-box-actions">
+                        <button class="action-button fav-button ${isFavorite ? 'is-favorite' : ''}" title="Favorite"><i class="fas fa-star fa-fw"></i></button>
+                        <button class="action-button edit-button" title="Edit"><i class="fas fa-pencil-alt fa-fw"></i></button>
+                        <button class="action-button delete-button" title="Delete"><i class="fas fa-trash-alt fa-fw"></i></button>
+                    </div>
                 `;
                 
-                // Event Listeners for actions
                 linkWrapper.querySelector('.delete-button').onclick = e => { e.preventDefault(); e.stopPropagation(); deleteLink(link.url, category.name); };
                 linkWrapper.querySelector('.edit-button').onclick = e => { e.preventDefault(); e.stopPropagation(); openEditModal(link.url, category.name); };
                 linkWrapper.querySelector('.fav-button').onclick = e => { e.preventDefault(); e.stopPropagation(); toggleFavorite(link.url); };
@@ -299,11 +510,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             section.appendChild(titleWrapper);
-            section.appendChild(document.createElement('div')).className = 'accent-line mb-6';
+            section.appendChild(document.createElement('div')).className = 'accent-line';
             section.appendChild(grid);
             categoriesContainer.appendChild(section);
 
-            titleWrapper.querySelector('.delete-category-button').onclick = () => deleteCategory(category.name);
+            // MODIFICATION: Removed the event listener for the non-existent delete category button
         });
     };
 
@@ -320,31 +531,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const category = data.categories.find(c => c.name === categoryName);
         if (category) {
             category.links = category.links.filter(l => l.url !== url);
-            // Also remove from favorites if it exists there
             data.favorites = data.favorites.filter(fav => fav !== url);
             saveData();
             render();
         }
     };
-
-    const deleteCategory = (categoryName) => {
-        if (!confirm(Are you sure you want to delete the entire "${categoryName}" category and all its links? This cannot be undone.)) return;
-        // First remove all links in that category from favorites
-        const categoryToDelete = data.categories.find(c => c.name === categoryName);
-        if (categoryToDelete) {
-            const urlsToDelete = categoryToDelete.links.map(l => l.url);
-            data.favorites = data.favorites.filter(fav => !urlsToDelete.includes(fav));
-        }
-        // Then delete the category
-        data.categories = data.categories.filter(c => c.name !== categoryName);
-        saveData();
-        render();
-    };
+    
+    // MODIFICATION: The entire deleteCategory function has been removed.
 
     const openModalForAdd = () => {
         modal.classList.add('visible');
         modalTitle.textContent = 'Add New Item';
-        linkForm.style.display = 'block';
+        document.getElementById('link-form-section').style.display = 'block';
         addCategorySection.style.display = 'block';
         linkSubmitBtn.textContent = 'Add Link';
         linkForm.reset();
@@ -355,8 +553,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const openEditModal = (url, categoryName) => {
         modal.classList.add('visible');
         modalTitle.textContent = 'Edit Link';
-        linkForm.style.display = 'block';
-        addCategorySection.style.display = 'none'; // Hide category adding when editing a link
+        document.getElementById('link-form-section').style.display = 'block';
+        addCategorySection.style.display = 'none';
         linkSubmitBtn.textContent = 'Save Changes';
         
         populateCategorySelect(categoryName);
@@ -386,7 +584,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const originalUrl = originalLinkUrlInput.value;
 
         if (originalUrl) { // EDIT MODE
-            // Find the original category and link
             let originalCategory = null;
             let linkIndex = -1;
             for (const cat of data.categories) {
@@ -397,21 +594,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
                 }
             }
-
             if (originalCategory) {
                 const linkObject = originalCategory.links[linkIndex];
-                
-                // If category is the same, just update the URL
                 if (originalCategory.name === newCategoryName) {
                     linkObject.url = newUrl;
                 } else {
-                    // If category changed, remove from old and add to new
                     originalCategory.links.splice(linkIndex, 1);
                     const newCategory = data.categories.find(c => c.name === newCategoryName);
                     newCategory.links.push({ url: newUrl });
                 }
-                
-                // Update favorites if the URL changed
                 const favIndex = data.favorites.indexOf(originalUrl);
                 if (favIndex > -1) {
                     data.favorites[favIndex] = newUrl;
